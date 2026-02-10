@@ -1,5 +1,6 @@
 ﻿# 设备IP地址
 # $deviceIp = "192.168.1.221"
+$deviceIName = Read-Host "请输入设备名称"
 $deviceIp = Read-Host "请输入设备IP"
 $resolution = Read-Host "请输入分辨率"
 $fps = Read-Host "请输入帧数"
@@ -67,7 +68,7 @@ $htmlDetailEnd = "</pre>"
 
 
 try {
-    $newFileName = "$resolution-$fps-$deviceIp-$(Get-Date -Format "yyyyMMddHHmmss").html"
+    $newFileName = "$deviceIName-$resolution-$fps-$deviceIp-$(Get-Date -Format "yyyyMMddHHmmss").html"
     if (Test-Path $newFileName) {
         Remove-Item $newFileName
     }
@@ -122,8 +123,7 @@ try {
         Add-Content -Path $outputFile -Value "$htmlTitleEnd" -Encoding UTF8
         Add-Content -Path $outputFile -Value "$htmlDetailStart" -Encoding UTF8
         Add-Content -Path $outputFile -Value "概览" -Encoding UTF8
-        # adb -s $deviceIp shell top -m 10 -n 1 -b | Select-String "(%cpu)|(PID USER)|io.agora.entfull" | Out-File -FilePath $outputFile -Append -Encoding UTF8 
-        adb -s $deviceIp shell top -m 10 -n 1 | Select-String "(%cpu)|(PID USER)|io.agora.entfull" | Out-File -FilePath $outputFile -Append -Encoding UTF8 
+        adb -s $deviceIp shell top -m 10 -n 1 -b | Select-String "(%cpu)|(PID USER)|io.agora.entfull" | Out-File -FilePath $outputFile -Append -Encoding UTF8 
         # Add-Content -Path $outputFile -Value "详情" -Encoding UTF8
         # adb -s $deviceIp shell top -m 10 -n 1 -b | Out-File -FilePath $outputFile -Append -Encoding UTF8 
         Add-Content -Path $outputFile -Value "$htmlDetailEnd" -Encoding UTF8

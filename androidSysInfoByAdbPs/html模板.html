@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设备日志</title>
+    <style>
+
+        .title{
+            color:black;
+            font-weight: bold;
+        }
+        .detail{
+            color: #333333;
+        }
+        .time{
+            color: blue;
+        }
+   
+
+
+
+    </style>
+
+
+
+</head>
+<body>
+    <div>
+        <pre class="time"> 
+        </pre>
+        <pre class="title">
+            S[%CPU
+        </pre>
+        <pre class="detail">
+        </pre>
+        <pre>S[%CPU</pre>
+        <pre>io.agora.entfull</pre>
+        <pre>%cpu</pre>
+
+        <script>
+            for(var i=0;i<document.getElementsByTagName("pre").length;i++){
+                document.getElementsByTagName("pre")[i].innerHTML =  document.getElementsByTagName("pre")[i].innerText
+                .replace("[%CPU","<strong>[%CPU</strong>")
+                .replace("io.agora.entfull","<strong>io.agora.entfull</strong>")
+                .replace("%cpu","<strong>%cpu</strong>")
+            }
+         
+        </script>
+    </div>
+</body>
+</html>
